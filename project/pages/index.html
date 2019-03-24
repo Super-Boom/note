@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div @click="showPop">点击弹窗</div>
+    <div id="father">
+      <div class="gray" v-show="visible">
+        <ul class="box">
+          <li v-for="item in list">{{item}}</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue!',
+      visible: false,
+      list: []
+    },
+    mounted() {
+      for (let i = 0; i < 100; i++) {
+        this.list.push(i);
+      };
+    },
+    methods: {
+      showPop() {
+        this.visible = true
+      },
+    }
+  })
+</script>
+
+</html>
+<style>
+  * {
+    padding: 0;
+    box-sizing: border-box
+  }
+
+  #app {
+    position: fixed;
+  }
+
+  body.modal-open {
+    position: fixed;
+    width: 100%;
+  }
+
+  #father {
+    position: fixed;
+  }
+
+  .gray {
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: .5;
+  }
+
+  .box {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    overflow-y: scroll;
+    background-color: #fff;
+    position: fixed;
+    margin: 0 auto;
+    z-index: 3;
+  }
+</style>

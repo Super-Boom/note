@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Brook">
+  <title>解决滚动穿透问题 Demo</title>
+</head>
+
+<body>
+  <div id="page">
+    <style>
+      body.modal-open {
+        position: fixed;
+        width: 100%;
+      }
+      .modal {
+        background: rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+      .modal-frame {
+        position: absolute;
+        left: 10%;
+        right: 10%;
+        top: 50%;
+        transform: translateY(-50%);
+        border: solid 1px #ddd;
+        background: #fff;
+        padding: 1em;
+      }
+    </style>
+    <div id="modal" class="modal">
+      dsadsadsadsa
+      <div class="modal-frame">
+        <div style="height:9em;overflow-y:auto;">
+          这里是可滚动内容<br>
+          Modal Content<br>
+          Modal Content<br>
+          Modal Content<br>
+          Modal Content<br>
+          Modal Content<br>
+          Modal Content<br>
+          Modal Content<br>
+          Modal Content<br>
+          Modal Content<br>
+          Modal Content<br>
+          Modal Content<br>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var ModalHelper = (function (bodyCls) {
+          var scrollTop;
+          return {
+            afterOpen: function () {
+              scrollTop = document.scrollingElement.scrollTop;
+              document.body.classList.add(bodyCls);
+              document.body.style.top = -scrollTop + 'px';
+            },
+            beforeClose: function () {
+              document.body.classList.remove(bodyCls);
+              document.scrollingElement.scrollTop = scrollTop;
+            }
+          };
+        })('modal-open');
+      })();
+    </script>
+  </div>
+</body>
+
+</html>
