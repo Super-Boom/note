@@ -34,4 +34,20 @@ module.exports = {
 ```js
 import Vue from './runtime/index'
 ```
+>>>> `runtime/index.js` 中
+```js
+import Vue from 'core/index'
+```
+>>>>> 在 `src/core/index.js` 中
+```js
+import Vue from './instance/index'
+```
+>>>>>> 在 `instance/index.js` 中  
+引入了五个方法
+```js
+import {initMixin} from './init'
+import {stateMixin} from './state'
+import {renderMixin} from './render'
+
+```
 
