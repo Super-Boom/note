@@ -1,22 +1,37 @@
 # vue源码学习
-## 1.  new Vue()做了什么
+> 从`package.json`文件说起
 ```js
-function Vue(options){
-    if(process.env.NODE_ENV !== 'production' && !(this instanceof Vue)){
-        warn('Vue is a constructor and should be called with rhe `new` keyword')
-    }
-    this_init(options);
+"dev": "rollup -w -c scripts/config.js --environment TARGET:web-full-dev",
+```
+>>`scripts/config.js`文件
+```js
+'web-full-dev':{
+    entry: resolve('web/entry-runtime-with-compiler.js'),
+    dest: resolve('dist/vue.js'),
+    format: 'umd',
+    env: 'development',
+    alias: { he: './entity-decoder' },
+    banner
 }
 ```
-`this._init()` 方法
+>> 此处的web是一个别名，相关配置在 `scripts/alias.js` 中
 ```js
-Vue.prototype._init = function(option?:Object){
-    const vm: Component = this
-    // ...忽略，从45行看起
-    if(process.env.NODE_ENV!=='production'){
-        initProxy(vm)
-    } else {
-        vm._renderPRoxy = vm;
-    }
+const path = require('path');
+const resolve = p=>path.resolve(__dirname,'../',p);
+module.exports = {
+    vue: resolve('src/platforms/web/entry-runtime-with-compiler'),
+    compiler: resolve('src/compiler'),
+    core: resolve('src/core'),
+    shared: resolve('src/shared'),
+    web: resolve('src/platforms/web'),
+    weex: resolve('src/platforms/weex'),
+    server: resolve('src/server'),
+    entries: resolve('src/entries'),
+    sfc: resolve('src/sfc')
 }
 ```
+>>> 在 `src/platforms/web/entry-runtime-with-compiler.js` 中
+```js
+import Vue from './runtime/index'
+```
+
