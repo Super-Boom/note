@@ -44,3 +44,4 @@ git config --global alias.br branch
 git config --global alias.ci commit
 git commit --global alias.st status
 ``` 
+
