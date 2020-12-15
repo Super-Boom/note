@@ -43,11 +43,20 @@ import Vue from 'core/index'
 import Vue from './instance/index'
 ```
 >>>>>> 在 `instance/index.js` 中  
+
 引入了五个方法
 ```js
-import {initMixin} from './init'
-import {stateMixin} from './state'
-import {renderMixin} from './render'
+import { initMixin } from './init'
+import { stateMixin } from './state'
+import { renderMixin } from './render'
+import { eventsMixin } from './events'
+import { lifecycleMixin } from './lifecycle'
+import { warn } from '../util/index'
+
+function Vue(options){
+    if(process.env.NODE_ENV!=='production'){
+
+    }
+}
 
 ```
-
